@@ -3,4 +3,11 @@
   "description": "Automated design review, typography fixing, layout adjustment, and polish passes for all repositories",
   "visibility": "public",
   "auto_init": true
+# Example GitHub Actions step
+- name: Run Design Reviews
+  run: |
+    bash scripts/critique.sh
+    bash scripts/typeset.sh
+    bash scripts/layout.sh
+    bash scripts/polish.sh
 }
