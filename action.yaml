@@ -6,7 +6,7 @@
   "strategy":
   "matrix":
      "include":
-      - repo: 'your-repo-name'
+      - repo: 'https://github.com/auraecosystem/design-review-automation'
 # Example GitHub Actions step
 - name: Run Design Reviews
   run: |
