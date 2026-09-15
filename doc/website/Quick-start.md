@@ -1,3 +1,4 @@
+```yaml
 {
   "owner": "auraecosystem",
   "repo": "design-review-automation",
