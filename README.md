@@ -1,5 +1,9 @@
 # Design Review Automation
 
+Automated design review, typography fixing, layout adjustment, and polish passes for all repositories
+
+## design-review-automation
+
 🎨 **Comprehensive design review, typography fixing, layout adjustment, and polish passes for all Aura Ecosystem repositories.**
 
 ## Overview
