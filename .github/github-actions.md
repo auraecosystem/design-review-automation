@@ -23,12 +23,14 @@ As a member of the GitHub community, your participation is essential. While we c
 Thank you once again for your contribution to making GitHub even better! We're grateful for your ongoing support and collaboration in shaping the future of our platform. ⭐
 
 applied across all your repositories (excluding forks). Let me set this up with custom commands for
-[/critique]
-[/polish]
-[/polish]
-[ /typeset]
-[/polish]
-[/polish]
-[/layout, ]
-[/polish]
+
+[/critique](https://github.com/apps/github-actions)
+
+
+[ /typeset](https://github.com/apps/github-actions)
+
+
+[/layout, ](https://github.com/apps/github-actions)
+
+
 [/polish](https://github.com/apps/github-actions)
