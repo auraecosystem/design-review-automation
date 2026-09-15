@@ -1,0 +1,33 @@
+name: Aura Composite Action Demo
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+      - dev
+
+jobs:
+  hello-world:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        repo:
+          - auraecosystem/APLCE
+          - auraecosystem/KIBS
+          - auraecosystem/aegis
+          - auraecosystem/projects
+          - auraecosystem/gh-actions-runner
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Run Aura Hello World Composite Action
+        uses: ./.github/actions/hello-world
+        with:
+          who-to-greet: ${{ matrix.repo }}
+
+      - name: Display Output
+        run: |
+          echo "Random Number: ${{ steps.hello-world.outputs.random-number }}"
