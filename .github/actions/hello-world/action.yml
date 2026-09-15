@@ -1,0 +1,82 @@
+name: Hello World
+description: Greet someone, generate a random number, update PATH, run goodbye script, and execute Aura Design Reviews.
+
+inputs:
+  who-to-greet:
+    description: Who to greet
+    required: false
+    default: World
+
+outputs:
+  random-number:
+    description: Random number generated during execution
+    value: ${{ steps.random-number-generator.outputs.random-number }}
+
+runs:
+  using: composite
+
+  steps:
+    - name: 👋 Set Greeting
+      shell: bash
+      env:
+        INPUT_WHO_TO_GREET: ${{ inputs.who-to-greet }}
+      run: |
+        echo "================================="
+        echo "🚀 Hello ${INPUT_WHO_TO_GREET}!"
+        echo "Welcome to Aura Ecosystem Composite Action."
+        echo "================================="
+
+    - name: 🎲 Generate Random Number
+      id: random-number-generator
+      shell: bash
+      run: |
+        RANDOM_NUMBER=$RANDOM
+        echo "Generated number: ${RANDOM_NUMBER}"
+        echo "random-number=${RANDOM_NUMBER}" >> "$GITHUB_OUTPUT"
+
+    - name: 📦 Add Action Directory to PATH
+      shell: bash
+      env:
+        GITHUB_ACTION_PATH: ${{ github.action_path }}
+      run: |
+        echo "${GITHUB_ACTION_PATH}" >> "$GITHUB_PATH"
+        echo "Added ${GITHUB_ACTION_PATH} to PATH"
+
+    - name: 👋 Run goodbye.sh
+      shell: bash
+      run: |
+        chmod +x "${{ github.action_path }}/goodbye.sh"
+        "${{ github.action_path }}/goodbye.sh"
+
+    - name: 🎨 Run Aura Design Reviews
+      shell: bash
+      run: |
+        echo "Running Aura Design Review Suite..."
+
+        chmod +x scripts/*.sh || true
+
+        bash scripts/critique.sh .
+        bash scripts/typeset.sh .
+        bash scripts/layout.sh .
+        bash scripts/polish.sh .
+
+        echo "Design review completed."
+
+    - name: 📋 Review Aura Ecosystem Repositories
+      shell: bash
+      run: |
+        REPOS=(
+          "auraecosystem/APLCE"
+          "auraecosystem/KIBS"
+          "auraecosystem/aegis"
+          "auraecosystem/projects"
+          "auraecosystem/gh-actions-runner"
+          "auraecosystem/Images-runner"
+          "Qubuhub-org/cloud"
+          "Web4application/Web4"
+        )
+
+        echo "Repositories queued for review:"
+        for repo in "${REPOS[@]}"; do
+          echo " • $repo"
+        done
