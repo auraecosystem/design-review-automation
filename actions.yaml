@@ -1,7 +1,0 @@
-# Example GitHub Actions step
-- name: Run Design Reviews
-  run: |
-    bash scripts/critique.sh
-    bash scripts/typeset.sh
-    bash scripts/layout.sh
-    bash scripts/polish.sh
