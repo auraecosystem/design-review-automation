@@ -1,5 +1,7 @@
 **💬 Your Product Feedback Has Been Submitted 🎉**
 
+
+Thank [github-actions](https://github.com/copilot)
 Thank you for taking the time to share your insights with us! Your feedback is invaluable as we build a better GitHub experience for all our users.
 
 **Here's what you can expect moving forward ⏩**
@@ -12,7 +14,7 @@ Thank you for taking the time to share your insights with us! Your feedback is i
 
 **Where to look to see what's shipping 👀**
 - Read the [Changelog](https://github.blog/changelog/) for real-time updates on the latest GitHub features, enhancements, and calls for feedback.
-- Explore our [Product Roadmap](https://github.com/orgs/github/projects/4247), which details upcoming major releases and initiatives.
+- Explore our [Product Roadmap](https://github.com/orgs/github/projects/), which details upcoming major releases and initiatives.
 
 **What you can do in the meantime 💻**
 - Upvote and comment on other user feedback Discussions that resonate with you.
@@ -24,13 +26,13 @@ Thank you once again for your contribution to making GitHub even better! We're g
 
 applied across all your repositories (excluding forks). Let me set this up with custom commands for
 
-[/critique](https://github.com/apps/github-actions)
+[/critique]([https://github.com/apps/github-actions](https://github.com/copilot))
 
 
-[ /typeset](https://github.com/apps/github-actions)
+[ /typeset](https://github.com/copilot)
 
 
-[/layout, ](https://github.com/apps/github-actions)
+[/layout, ]([https://github.com/apps/github-actions](https://github.com/copilot)https://github.com/copilot)
 
 
-[/polish](https://github.com/apps/github-actions)
+[/polish]([https://github.com/apps/github-actions](https://github.com/copilot))
