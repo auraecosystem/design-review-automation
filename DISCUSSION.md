@@ -12,7 +12,7 @@ Copilot Cloud Agent
 
 In **Copilot cloud agent**, as soon as the agent views an image file (PNG/JPG) with its `view` tool, the next model request fails and the session stops with:
 
-```
+```cmd
 Execution failed: CAPIError: 400 Error while downloading file. Upstream status code: 404.
 ```
 
