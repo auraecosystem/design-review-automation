@@ -1,8 +1,6 @@
-### 🏷️ Discussion Type
+# Design Review Automation
 
-Bug
-
-### 💬 Feature/Topic Area
+Automated design review, typography fixing, layout adjustment, and polish passes for all repositories
 
 Copilot Cloud Agent
 
@@ -12,7 +10,7 @@ Copilot Cloud Agent
 
 In **Copilot cloud agent**, as soon as the agent views an image file (PNG/JPG) with its `view` tool, the next model request fails and the session stops with:
 
-```cmd
+```txt
 Execution failed: CAPIError: 400 Error while downloading file. Upstream status code: 404.
 ```
 
@@ -67,6 +65,4 @@ Execution failed: CAPIError: 400 Error while downloading file. Upstream status c
 - **Expected:** viewing an image works on all models, as it does on Claude and in the local Copilot CLI.
 - **Actual:** GPT sessions stop with CAPIError 400 / upstream 404 right after viewing an image.
 
-## Impact
 
-Any cloud agent task that looks at a screenshot or image asset fails on the default model (Auto → GPT-5.4). The same error appears on public Copilot PRs, e.g. drrowdev/stillroom-wardrobe#7.
