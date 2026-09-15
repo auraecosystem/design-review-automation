@@ -1,0 +1,72 @@
+### 🏷️ Discussion Type
+
+Bug
+
+### 💬 Feature/Topic Area
+
+Copilot Cloud Agent
+
+### Body
+
+## Summary
+
+In **Copilot cloud agent**, as soon as the agent views an image file (PNG/JPG) with its `view` tool, the next model request fails and the session stops with:
+
+```
+Execution failed: CAPIError: 400 Error while downloading file. Upstream status code: 404.
+```
+
+- Fails on **GPT models** (gpt-5.4, gpt-5.3-codex).
+- The same flow on **claude-sonnet-5** views the same image and completes normally.
+- The same images view fine in the **local Copilot CLI** (1.0.83) with gpt-5.4 and gpt-5.3-codex.
+
+## Environment
+
+- Account: HaiDuc0147 (Copilot Pro)
+- Repository: HaiDuc0147/copilot-image-repro (private — happy to grant access)
+- Product: Copilot cloud agent, started by assigning an issue to Copilot or from the Agents tab
+- Model chosen explicitly in the UI: GPT-5.4 fails, Claude Sonnet succeeds
+
+## Steps to reproduce (minimal, no MCP servers)
+
+1. Repository containing a small PNG, e.g. `images/small.png` (2 KB).
+2. Create an issue: "Look at images/small.png and write a one-paragraph description of it to NOTES.md."
+3. Assign to Copilot with model **GPT-5.4**.
+4. The agent calls `view images/small.png` (log: `view success=true`); the next request fails with the CAPIError above.
+5. Repeat with model **Claude Sonnet** — the agent views the image and completes.
+
+## What the logs show
+
+- The `view` tool succeeds. The failure is on the *following* request, before any `assistant.usage` line for that turn — it looks like CAPI rejects the request while resolving the uploaded image attachment for the OpenAI route.
+- The runner has `GITHUB_UPLOADS_URL=https://uploads.github.com/user-attachments/assets` and `GITHUB_DOWNLOADS_URL=https://api.github.com/internal/user-attachments/assets`; both hosts are on the firewall allowlist.
+- The image source doesn't matter (file in the repo, `/tmp`, or downloaded with curl) — any viewed image fails on GPT.
+- In one run the error was delayed: image viewed at turn 6, error at turn 30 after `session.idle`.
+
+## Request IDs (GPT, all failed)
+
+| Date (UTC+7) | Model | Actions run / PR | Request ID |
+|---|---|---|---|
+| 2026-09-14 | gpt-5.4 (minimal repro, no MCP) | PR #1–#3 | `3C03:1529BD:4F597:576C7:6AA7F94B` |
+| 2026-09-14 | gpt-5.3-codex (minimal repro, no MCP) | PR #1–#3 | `52C3:38D699:4F5BAC:572965:6AA7F96C` |
+| 2026-09-15 | gpt-5.4 | PR #5 | `D400:1649DF:82B9CE:95DB74:6AA8ED32` |
+| 2026-09-15 | gpt-5.4 | run 34943790968 / PR #15 | `8835:23CC9C:B34BF4:C71F2A:6AA8F96F` |
+| 2026-09-15 | gpt-5.4 | run 34951213399 | `5004:37FE1A:126BD27:144C00E:6AA90C58` |
+| 2026-09-15 | gpt-5.4 | run 34951740683 | `9423:1574DE:1372DF6:155F552:6AA90DCD` |
+| 2026-09-15 | gpt-5.4 | run 34953623977 | `F444:DDE0B:125E18:14592B:6AA912CE` |
+| 2026-09-15 | gpt-5.4 | run 34954896694 | `2808:222B8B:1752EC3:1990CB8:6AA9175C` |
+| 2026-09-15 | gpt-5.4 | run 34955651995 | `3400:3A124E:28137C3:3196747:6AA91828` |
+| 2026-09-15 | gpt-5.4 | run 34960688695 | `0416:377803:1C554C1:1F0BEA1:6AA9254C` |
+| 2026-09-15 | gpt-5.4 | run 34961119439 | `2403:1A91BD:3215FE:376C2F:6AA92647` |
+
+## Control (same flow on Claude — succeeded)
+
+- 2026-09-15, claude-sonnet-5, Actions run `34943711466` (PR #13): viewed the same PNG (`view success=true`) and completed normally.
+
+## Expected vs actual
+
+- **Expected:** viewing an image works on all models, as it does on Claude and in the local Copilot CLI.
+- **Actual:** GPT sessions stop with CAPIError 400 / upstream 404 right after viewing an image.
+
+## Impact
+
+Any cloud agent task that looks at a screenshot or image asset fails on the default model (Auto → GPT-5.4). The same error appears on public Copilot PRs, e.g. drrowdev/stillroom-wardrobe#7.
