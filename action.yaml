@@ -1,0 +1,6 @@
+{
+  "name": "design-review-automation",
+  "description": "Automated design review, typography fixing, layout adjustment, and polish passes for all repositories",
+  "visibility": "public",
+  "auto_init": true
+}
